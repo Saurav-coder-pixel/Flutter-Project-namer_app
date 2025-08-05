@@ -74,43 +74,80 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     return Scaffold(
-          // appBar: AppBar(
-          //     title: Center(child: Text('Namer_ App')),
-          //     backgroundColor: Colors.red.shade400,
-          // ),
+          appBar: AppBar(
+              title: Center(child: Text('Namer_ App')),
+              backgroundColor: Theme.of(context).colorScheme.primary,
+          ),
 
-      body: Row(
-        children: [
-          SafeArea(
-            child: NavigationRail(
-                selectedIndex: selectedIdx,
-                extended: false,
-                destinations: [
-                  NavigationRailDestination(
-                      icon: Icon(Icons.home),
-                      label: Text('Home')
-                  ),
-                  NavigationRailDestination(
-                      icon: Icon(Icons.favorite),
-                      label: Text('Favorite')
-                  ),
-                ],
-              onDestinationSelected: (value){
+      // body: Row(
+      //   children: [
+      //     SafeArea(
+      //       child: NavigationRail(
+      //           selectedIndex: selectedIdx,
+      //           extended: false,
+      //           destinations: [
+      //             NavigationRailDestination(
+      //                 icon: Icon(Icons.home),
+      //                 label: Text('Home')
+      //             ),
+      //             NavigationRailDestination(
+      //                 icon: Icon(Icons.favorite),
+      //                 label: Text('Favorite')
+      //             ),
+      //           ],
+      //         onDestinationSelected: (value){
+      //           setState(() {
+      //             selectedIdx= value;
+      //           });
+      //         }
+      //       ),
+      //     ),
+      
+      
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+        child: Text('Menu', 
+            style:TextStyle(
+              color: Theme.of(context).colorScheme.onPrimary,
+              fontSize: 24,
+            ),
+        ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              selected: selectedIdx== 0,
+              onTap:(){
                 setState(() {
-                  selectedIdx= value;
+                  selectedIdx=0;
+                  Navigator.pop(context);
                 });
               }
             ),
-          ),
+            ListTile(
+                leading: Icon(Icons.favorite),
+                title: Text('Favourite'),
+                selected: selectedIdx== 1,
+                onTap:(){
+                  setState(() {
+                    selectedIdx=1;
+                    Navigator.pop(context);
+                  });
+                }
+            ),
+          ],
+        ),
+      ),
 
-          Expanded(
-          child: Container(
+          body:Container(
           color: Theme.of(context).colorScheme.onPrimary,
           child: page,
           )
-          )
-        ],
-      ),
     );
   }
 }
